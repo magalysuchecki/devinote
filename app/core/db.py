@@ -1,7 +1,6 @@
 from typing import Iterator
 
-from requests import Session
-from sqlmodel import SQLModel, create_engine
+from sqlmodel import Session, SQLModel, create_engine
 
 from app.core.config import settings
 

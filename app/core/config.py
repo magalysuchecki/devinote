@@ -9,7 +9,7 @@ class Settings(BaseSettings):
     )
     JWT_SECRET: str = Field(..., env="JWT_SECRET")
     JWT_ALGORITHM: str = Field(default="HS256", env="JWT_ALGORITHM")
-    JWT_EXPIRES_MIN: str = Field(default=60 * 24, env="JWT_EXPIRES_MIN")
+    JWT_EXPIRES_MIN: int = Field(default=60 * 24, env="JWT_EXPIRES_MIN")
     PROJECT_NAME: str = "Devinote"
 
     class Config:

@@ -6,13 +6,14 @@ from sqlmodel import Field, SQLModel
 class User(SQLModel, table=True):
     """Modelo Usuario."""
 
-    id: int = Field(default=None, primary_key=True)
+    __tablename__ = "user_user"
+    id: int | None = Field(default=None, primary_key=True)
     email: str = Field(index=True, unique=True)
     full_name: str = Field(default="")
     hashed_password: str  # no lleva field por que se genera
 
 
-# Modelos de validación  (DTOs, Data Transfer Object)
+# Modelos de validación - respuesta  (DTOs, Data Transfer Object)
 
 
 class UserCreate(SQLModel):

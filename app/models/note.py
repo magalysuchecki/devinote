@@ -1,17 +1,17 @@
 from typing import Optional
 
-from pydantic import Field
-from sqlmodel import SQLModel
+from sqlmodel import Field, SQLModel
 
 
 class Note(SQLModel, table=True):
     """Modelo Nota."""
 
-    id: int = Field(default=None, primary_key=True)
+    __tablename__ = "note_note"
+    id: int | None = Field(default=None, primary_key=True)
     title: str
     content: str = ""
     color: Optional[str] = None
-    owner_id: int = Field(foreign_key="user.id", index=True)
+    owner_id: int = Field(foreign_key="user_user.id", index=True)
 
 
 # dtos

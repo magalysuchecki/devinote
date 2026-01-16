@@ -81,19 +81,11 @@ class ShareRepository:
         return self.db.exec(q).first() is not None
 
     def list_note_ids_shared_directly(self, user_id: int) -> list[int]:
-        return (
-            self.db.exec(
-                select(NoteShare.note_id).where(NoteShare.user_id == user_id)
-            )
-            .scalars()
-            .all()
-        )
+        return self.db.exec(
+            select(NoteShare.note_id).where(NoteShare.user_id == user_id)
+        ).all()
 
     def list_label_ids_shared_with_user(self, user_id: int) -> list[int]:
-        return (
-            self.db.exec(
-                select(LabelShare.note_id).where(LabelShare.user_id == user_id)
-            )
-            .scalars()
-            .all()
-        )
+        return self.db.exec(
+            select(LabelShare.label_id).where(LabelShare.user_id == user_id)
+        ).all()

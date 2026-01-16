@@ -1,28 +1,46 @@
-from pydantic import Field
+from enum import Enum
+
 from sqlalchemy import UniqueConstraint
-from sqlmodel import Enum, SQLModel
+from sqlmodel import Field, SQLModel
 
 
 class ShareRole(str, Enum):
+    """Clase de roles."""
+
     READ = "read"
     EDIT = "edit"
 
 
 class NoteShare(SQLModel, table=True):
-    __table_args = [UniqueConstraint("note_id", "user_id", name="uq_note_user")]
+    """Modelo Nota Compartida."""
 
-    id: int = Field(default=None, primary_key=True)
-    note_id: int = Field(foreign_key="note.id", index=True)
-    user_id: int = Field(foreign_key="user.id", index=True)
+    __tablename__ = "share_noteshare"
+    __table_args = (
+        UniqueConstraint("note_id", "user_id", name="uq_note_user"),
+    )
+
+    id: int | None = Field(default=None, primary_key=True)
+    note_id: int = Field(foreign_key="note_note.id", index=True)
+    user_id: int = Field(foreign_key="user_user.id", index=True)
     role: ShareRole = Field(default=ShareRole.READ)
 
 
 class LabelShare(SQLModel, table=True):
-    __table_args = [
-        UniqueConstraint("label_id", "user_id", name="uq_label_user")
-    ]
+    """Modelo Etiqueta Compartida."""
 
-    id: int = Field(default=None, primary_key=True)
-    label_id: int = Field(foreign_key="label.id", index=True)
-    user_id: int = Field(foreign_key="user.id", index=True)
+    __tablename__ = "share_labelshare"
+    __table_args = (
+        UniqueConstraint("label_id", "user_id", name="uq_label_user"),
+    )
+
+    id: int | None = Field(default=None, primary_key=True)
+    label_id: int = Field(foreign_key="label_label.id", index=True)
+    user_id: int = Field(foreign_key="user_user.id", index=True)
     role: ShareRole = Field(default=ShareRole.READ)
+
+
+class ShareRequest(SQLModel):
+    """Modelo para compartir objetos."""
+
+    target_user_id: int = Field(gt=0)
+    role: ShareRole = ShareRole.READ
