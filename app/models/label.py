@@ -19,6 +19,9 @@ class NoteLabelLink(SQLModel, table=True):
     """Modelo Enlace de Etiqueta de Nota"""
 
     __tablename__ = "label_notelabellink"
+    __table_args__ = (
+        UniqueConstraint("note_id", "label_id", name="uq_note_label_link"),
+    )
     id: int | None = Field(default=None, primary_key=True)
     note_id: int = Field(foreign_key="note_note.id", index=True)
     label_id: int = Field(foreign_key="label_label.id", index=True)

@@ -9,14 +9,13 @@ from app.api.routers.labels_router import router as labels_router
 from app.api.routers.notes_router import router as notes_router
 from app.api.routers.shares_router import router as shares_router
 from app.core.config import settings
-from app.core.db import init_db
 
 load_dotenv()
 
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
-    init_db()
+    # init_db() dev
     yield
 
 

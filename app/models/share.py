@@ -15,7 +15,7 @@ class NoteShare(SQLModel, table=True):
     """Modelo Nota Compartida."""
 
     __tablename__ = "share_noteshare"
-    __table_args = (
+    __table_args__ = (
         UniqueConstraint("note_id", "user_id", name="uq_note_user"),
     )
 
@@ -29,7 +29,7 @@ class LabelShare(SQLModel, table=True):
     """Modelo Etiqueta Compartida."""
 
     __tablename__ = "share_labelshare"
-    __table_args = (
+    __table_args__ = (
         UniqueConstraint("label_id", "user_id", name="uq_label_user"),
     )
 

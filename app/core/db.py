@@ -1,6 +1,6 @@
 from typing import Iterator
 
-from sqlmodel import Session, SQLModel, create_engine
+from sqlmodel import Session, create_engine
 
 from app.core.config import settings
 
@@ -14,7 +14,8 @@ engine = create_engine(
 
 
 def init_db() -> None:
-    SQLModel.metadata.create_all(engine)
+    pass
+    # SQLModel.metadata.create_all(engine) # dev
 
 
 def get_session() -> Iterator[Session]:
